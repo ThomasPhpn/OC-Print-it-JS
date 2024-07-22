@@ -23,7 +23,7 @@ let tagline = document.getElementById("tagline"); // récupérer le p
 const flecheDroite = document.getElementById("arrow-right"); // récupérer la flèche droite
 const flecheGauche = document.getElementById("arrow-left"); // récupérer la flèche gauche
 let dots = document.querySelectorAll(".dot"); // récupérer tous les points
-const debutUrl = "/assets/images/slideshow/"; // définir le début de l'URL
+const debutUrl = "assets/images/slideshow/"; // définir le début de l'URL
 
 let currentIndex = 0; // initialiser un index
 
