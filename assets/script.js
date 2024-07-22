@@ -27,7 +27,7 @@ function displaySlide(index){
 	} else {
 		
 	}
-
+// test
 }
 
 function nextSlide {
