@@ -20,19 +20,28 @@ const slides = [
 
 let bannerImage = document.getElementById("banner-img"); // recuperer l'image
 let tagline = document.getElementById("tagline"); // récupérer le p
-const flecheDroite = document.getElementById("arrow-right"); // récupérer la flèche droite
-const flecheGauche = document.getElementById("arrow-left"); // récupérer la flèche gauche
+const rightArrow = document.getElementById("arrow-right"); // récupérer la flèche droite
+const leftArrow = document.getElementById("arrow-left"); // récupérer la flèche gauche
 let dots = document.querySelectorAll(".dot"); // récupérer tous les points
-const debutUrl = "./assets/images/slideshow/"; // définir le début de l'URL
+const url = "./assets/images/slideshow/"; // définir le début de l'URL
 
-let currentIndex = 0; // initialiser un index
+function init(slide) {
+  bannerImage.src = url + slides[slide].image; //
+  tagline.innerHTML = slides[slide].tagLine; //
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("dot_selected", i === slide); //
+  });
+}
 
-flecheDroite.addEventListener("click", function () {
+init(0);
+
+let currentIndex = 0;
+rightArrow.addEventListener("click", function () {
   currentIndex++;
   if (currentIndex >= slides.length) {
     currentIndex = 0;
   }
-  bannerImage.src = debutUrl + slides[currentIndex].image;
+  bannerImage.src = url + slides[currentIndex].image;
   tagline.innerHTML = slides[currentIndex].tagLine;
   dots.forEach((dot) => {
     dot.classList.remove("dot_selected");
@@ -40,12 +49,12 @@ flecheDroite.addEventListener("click", function () {
   dots[currentIndex].classList.add("dot_selected");
 });
 
-flecheGauche.addEventListener("click", function () {
+leftArrow.addEventListener("click", function () {
   currentIndex--;
   if (currentIndex < 0) {
     currentIndex = 3;
   }
-  bannerImage.src = debutUrl + slides[currentIndex].image;
+  bannerImage.src = url + slides[currentIndex].image;
   tagline.innerHTML = slides[currentIndex].tagLine;
   dots.forEach((dot) => {
     dot.classList.remove("dot_selected");
