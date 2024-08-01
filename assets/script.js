@@ -18,46 +18,39 @@ const slides = [
   },
 ];
 
-let bannerImage = document.getElementById("banner-img"); // recuperer l'image
-let tagline = document.getElementById("tagline"); // récupérer le p
-const rightArrow = document.getElementById("arrow-right"); // récupérer la flèche droite
-const leftArrow = document.getElementById("arrow-left"); // récupérer la flèche gauche
-let dots = document.querySelectorAll(".dot"); // récupérer tous les points
-const url = "./assets/images/slideshow/"; // définir le début de l'URL
+let bannerImage = document.getElementById("banner-img");
+let tagline = document.getElementById("tagline");
+const rightArrow = document.getElementById("arrow-right");
+const leftArrow = document.getElementById("arrow-left");
+let dots = document.querySelectorAll(".dot");
+const url = "./assets/images/slideshow/";
+let currentIndex = 0;
 
-function init(slide) {
-  bannerImage.src = url + slides[slide].image; //
-  tagline.innerHTML = slides[slide].tagLine; //
+function updateSlide(index) {
+  bannerImage.src = url + slides[index].image;
+  tagline.innerHTML = slides[index].tagLine;
   dots.forEach((dot, i) => {
-    dot.classList.toggle("dot_selected", i === slide); //
+    dot.classList.toggle("dot_selected", i === index);
   });
 }
 
-init(0);
-
-let currentIndex = 0;
-rightArrow.addEventListener("click", function () {
+function nextSlide() {
   currentIndex++;
   if (currentIndex >= slides.length) {
     currentIndex = 0;
   }
-  bannerImage.src = url + slides[currentIndex].image;
-  tagline.innerHTML = slides[currentIndex].tagLine;
-  dots.forEach((dot) => {
-    dot.classList.remove("dot_selected");
-  });
-  dots[currentIndex].classList.add("dot_selected");
-});
+  updateSlide(currentIndex);
+}
 
-leftArrow.addEventListener("click", function () {
+function previousSlide() {
   currentIndex--;
   if (currentIndex < 0) {
-    currentIndex = 3;
+    currentIndex = slides.length - 1;
   }
-  bannerImage.src = url + slides[currentIndex].image;
-  tagline.innerHTML = slides[currentIndex].tagLine;
-  dots.forEach((dot) => {
-    dot.classList.remove("dot_selected");
-  });
-  dots[currentIndex].classList.add("dot_selected");
-});
+  updateSlide(currentIndex);
+}
+
+rightArrow.addEventListener("click", nextSlide);
+leftArrow.addEventListener("click", previousSlide);
+
+updateSlide(currentIndex);
